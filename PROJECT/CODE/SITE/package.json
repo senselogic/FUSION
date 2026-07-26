@@ -40,7 +40,7 @@
         "senselogic-flow": "^0.0.39",
         "senselogic-geo": "^0.1.0",
         "senselogic-iota": "^0.1.0",
-        "senselogic-lingo": "^0.1.7",
+        "senselogic-lingo": "^0.1.10",
         "senselogic-opus": "^0.1.0",
         "senselogic-pika": "^0.1.0",
         "sharp": "^0.34.4",

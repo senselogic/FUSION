@@ -25,7 +25,7 @@
         "senselogic-def": "^0.1.21",
         "senselogic-flow": "^0.0.39",
         "senselogic-iota": "^0.1.0",
-        "senselogic-lingo": "^0.1.7",
+        "senselogic-lingo": "^0.1.10",
         "senselogic-opus": "^0.1.0"
     },
     "resolutions": {
