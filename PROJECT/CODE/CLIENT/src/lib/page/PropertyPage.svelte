@@ -1,7 +1,7 @@
 <script lang="ts">
     // -- IMPORTS
 
-    import { getLanguageCode, getTranslatedText, setLanguageCode, setLanguageSeparator } from 'senselogic-lingo';
+    import { getLanguageCode, getLocalizedText, setLanguageCode, setLanguageSeparator } from 'senselogic-lingo';
     import axios from 'axios';
     import { getHostRoute } from '../base';
     import type { PropertyDto, PropertyPageResponseDto } from '../api_types';
@@ -85,8 +85,8 @@
     <div class="hourglass">Loading...</div>
 {:else if property}
     <div>
-        <h1>{ getTranslatedText( property.title, languageCode ) }</h1>
-        <p>{ getTranslatedText( property.description ?? '', languageCode ) }</p>
+        <h1>{ getLocalizedText( property.title, languageCode ) }</h1>
+        <p>{ getLocalizedText( property.description ?? '', languageCode ) }</p>
     </div>
 {:else}
     <div>Property not found</div>

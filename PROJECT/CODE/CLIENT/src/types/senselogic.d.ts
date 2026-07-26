@@ -1,10 +1,10 @@
 declare module 'senselogic-lingo' {
   export function getLocalizedText(
-    text: string,
-    valueByNameMap?: Record<string, unknown>,
+    text?: string | null,
+    valueByNameMap?: Record<string, unknown> | string,
     languageTag?: string,
     defaultLanguageTag?: string
-  ): string;
+  ): string | null | undefined;
 
   export function getTranslatedText(
     multilingualText: string,

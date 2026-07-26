@@ -2,7 +2,7 @@
     // -- IMPORTS
 
     import axios from 'axios';
-    import { getLanguageCode, getTranslatedText, setLanguageCode, setLanguageSeparator } from 'senselogic-lingo';
+    import { getLanguageCode, getLocalizedText, setLanguageCode, setLanguageSeparator } from 'senselogic-lingo';
     import { onMount } from 'svelte';
         import { getHostRoute } from '../base';
     import type { HomePageResponseDto, PropertyDto } from '../api_types';
@@ -86,7 +86,7 @@
         {#each favoritePropertyArray as property }
             <a href={ '/property/' + property.id }>
                 <div class="property">
-                    <p>{ getTranslatedText( property.title, languageCode ) }</p>
+                    <p>{ getLocalizedText( property.title, languageCode ) }</p>
                 </div>
             </a>
         {/each}
