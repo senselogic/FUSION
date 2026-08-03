@@ -1,13 +1,13 @@
 // -- IMPORTS
 
-import { exec } from 'child_process';
-import fs from 'fs/promises';
-import { tmpdir } from 'os';
-import { join } from 'path';
-import { createCappedImage, createCoveredImage } from 'senselogic-pika';
-import { promisify } from 'util';
-import { bunnyService } from './bunny_service';
-import { supabaseService } from './supabase_service';
+import { exec } from "child_process";
+import fs from "fs/promises";
+import { tmpdir } from "os";
+import { join } from "path";
+import { createCappedImage, createCoveredImage } from "senselogic-pika";
+import { promisify } from "util";
+import { bunnyService } from "./bunny_service";
+import { supabaseService } from "./supabase_service";
 
 const execAsync = promisify(exec);
 
@@ -17,9 +17,9 @@ export class FileService {
   // -- INQUIRIES
 
   getFileUrl(filePath: string): string {
-    if (filePath.startsWith('/bunny/')) {
+    if (filePath.startsWith("/bunny/")) {
       return bunnyService.getFileUrl(filePath.substring(7));
-    } else if (filePath.startsWith('/supabase/')) {
+    } else if (filePath.startsWith("/supabase/")) {
       return supabaseService.getFileUrl(filePath.substring(9));
     } else {
       return filePath;
@@ -29,12 +29,12 @@ export class FileService {
   // -- OPERATIONS
 
   async copyFile(sourceFile: string | Uint8Array, targetFilePath: string, targetFileIsOverwritten = false) {
-    if (targetFilePath.startsWith('/bunny/')) {
+    if (targetFilePath.startsWith("/bunny/")) {
       return await bunnyService.copyFile(sourceFile, targetFilePath.substring(7), targetFileIsOverwritten);
-    } else if (targetFilePath.startsWith('/supabase/')) {
+    } else if (targetFilePath.startsWith("/supabase/")) {
       return await supabaseService.copyFile(sourceFile, targetFilePath.substring(9), targetFileIsOverwritten);
     } else {
-      if (typeof sourceFile === 'string') {
+      if (typeof sourceFile === "string") {
         return await fs.copyFile(sourceFile, targetFilePath);
       } else {
         return await fs.writeFile(targetFilePath, sourceFile);
@@ -45,9 +45,9 @@ export class FileService {
   // ~~
 
   async removeFile(targetFilePath: string) {
-    if (targetFilePath.startsWith('/bunny/')) {
+    if (targetFilePath.startsWith("/bunny/")) {
       return await bunnyService.removeFile(targetFilePath.substring(7));
-    } else if (targetFilePath.startsWith('/supabase/')) {
+    } else if (targetFilePath.startsWith("/supabase/")) {
       return await supabaseService.removeFile(targetFilePath.substring(9));
     } else {
       return await fs.unlink(targetFilePath);
@@ -57,71 +57,71 @@ export class FileService {
   // ~~
 
   async copyImageFile(sourceImageFile: string, targetFilePath: string, targetFileIsOverwritten = false): Promise<void> {
-    const preloadImage = createCappedImage(sourceImageFile, 360, 720, 'avif', 30);
-    const preloadImageFilePath = targetFilePath + '.preload.avif';
+    const preloadImage = createCappedImage(sourceImageFile, 360, 720, "avif", 30);
+    const preloadImageFilePath = targetFilePath + ".preload.avif";
     await this.copyFile(preloadImage as unknown as Uint8Array, preloadImageFilePath, targetFileIsOverwritten);
 
-    const tinyImage = createCappedImage(sourceImageFile, 480, 960, 'avif', 60);
-    const tinyImageFilePath = targetFilePath + '.tiny.avif';
+    const tinyImage = createCappedImage(sourceImageFile, 480, 960, "avif", 60);
+    const tinyImageFilePath = targetFilePath + ".tiny.avif";
     await this.copyFile(tinyImage as unknown as Uint8Array, tinyImageFilePath, targetFileIsOverwritten);
 
-    const smallImage = createCappedImage(sourceImageFile, 640, 1280, 'avif', 60);
-    const smallImageFilePath = targetFilePath + '.small.avif';
+    const smallImage = createCappedImage(sourceImageFile, 640, 1280, "avif", 60);
+    const smallImageFilePath = targetFilePath + ".small.avif";
     await this.copyFile(smallImage as unknown as Uint8Array, smallImageFilePath, targetFileIsOverwritten);
 
-    const mediumImage = createCappedImage(sourceImageFile, 960, 1920, 'avif', 60);
-    const mediumImageFilePath = targetFilePath + '.medium.avif';
+    const mediumImage = createCappedImage(sourceImageFile, 960, 1920, "avif", 60);
+    const mediumImageFilePath = targetFilePath + ".medium.avif";
     await this.copyFile(mediumImage as unknown as Uint8Array, mediumImageFilePath, targetFileIsOverwritten);
 
-    const wideImage = createCappedImage(sourceImageFile, 1280, 2560, 'avif', 60);
-    const wideImageFilePath = targetFilePath + '.wide.avif';
+    const wideImage = createCappedImage(sourceImageFile, 1280, 2560, "avif", 60);
+    const wideImageFilePath = targetFilePath + ".wide.avif";
     await this.copyFile(wideImage as unknown as Uint8Array, wideImageFilePath, targetFileIsOverwritten);
 
-    const largeImage = createCappedImage(sourceImageFile, 1920, 1920, 'avif', 60);
+    const largeImage = createCappedImage(sourceImageFile, 1920, 1920, "avif", 60);
     const largeImageFilePath = targetFilePath;
     await this.copyFile(largeImage as unknown as Uint8Array, largeImageFilePath, targetFileIsOverwritten);
 
-    const bigImage = createCappedImage(sourceImageFile, 2560, 2560, 'avif', 60);
-    const bigImageFilePath = targetFilePath + '.big.avif';
+    const bigImage = createCappedImage(sourceImageFile, 2560, 2560, "avif", 60);
+    const bigImageFilePath = targetFilePath + ".big.avif";
     await this.copyFile(bigImage as unknown as Uint8Array, bigImageFilePath, targetFileIsOverwritten);
 
-    const hugeImage = createCappedImage(sourceImageFile, 3840, 3840, 'avif', 60);
-    const hugeImageFilePath = targetFilePath + '.huge.avif';
+    const hugeImage = createCappedImage(sourceImageFile, 3840, 3840, "avif", 60);
+    const hugeImageFilePath = targetFilePath + ".huge.avif";
     await this.copyFile(hugeImage as unknown as Uint8Array, hugeImageFilePath, targetFileIsOverwritten);
 
-    const metaImage = createCoveredImage(sourceImageFile, 1200, 630, 'jpeg', 85);
-    const metaImageFilePath = targetFilePath + '.meta.jpg';
+    const metaImage = createCoveredImage(sourceImageFile, 1200, 630, "jpeg", 85);
+    const metaImageFilePath = targetFilePath + ".meta.jpg";
     await this.copyFile(metaImage as unknown as Uint8Array, metaImageFilePath, targetFileIsOverwritten);
   }
 
   // ~~
 
   async removeImageFile(targetFilePath: string): Promise<void> {
-    const preloadImageFilePath = targetFilePath + '.preload.avif';
+    const preloadImageFilePath = targetFilePath + ".preload.avif";
     await this.removeFile(preloadImageFilePath);
 
-    const tinyImageFilePath = targetFilePath + '.tiny.avif';
+    const tinyImageFilePath = targetFilePath + ".tiny.avif";
     await this.removeFile(tinyImageFilePath);
 
-    const smallImageFilePath = targetFilePath + '.small.avif';
+    const smallImageFilePath = targetFilePath + ".small.avif";
     await this.removeFile(smallImageFilePath);
 
-    const mediumImageFilePath = targetFilePath + '.medium.avif';
+    const mediumImageFilePath = targetFilePath + ".medium.avif";
     await this.removeFile(mediumImageFilePath);
 
-    const wideImageFilePath = targetFilePath + '.wide.avif';
+    const wideImageFilePath = targetFilePath + ".wide.avif";
     await this.removeFile(wideImageFilePath);
 
     const largeImageFilePath = targetFilePath;
     await this.removeFile(largeImageFilePath);
 
-    const bigImageFilePath = targetFilePath + '.big.avif';
+    const bigImageFilePath = targetFilePath + ".big.avif";
     await this.removeFile(bigImageFilePath);
 
-    const hugeImageFilePath = targetFilePath + '.huge.avif';
+    const hugeImageFilePath = targetFilePath + ".huge.avif";
     await this.removeFile(hugeImageFilePath);
 
-    const metaImageFilePath = targetFilePath + '.meta.jpg';
+    const metaImageFilePath = targetFilePath + ".meta.jpg";
     await this.removeFile(metaImageFilePath);
   }
 
@@ -133,8 +133,8 @@ export class FileService {
     width: number,
     targetFileIsOverwritten = false,
   ): Promise<void> {
-    const temporaryDir = await fs.mkdtemp(join(tmpdir(), 'video-'));
-    const temporaryFilePath = join(temporaryDir, 'temp.mp4');
+    const temporaryDir = await fs.mkdtemp(join(tmpdir(), "video-"));
+    const temporaryFilePath = join(temporaryDir, "temp.mp4");
 
     try {
       const command = `ffmpeg -y -i '${sourceVideoFile}' -vf 'scale=${width}:-2' -c:v libx264 -crf 30 -preset slow -c:a aac -movflags +faststart '${temporaryFilePath}'`;
@@ -155,10 +155,10 @@ export class FileService {
   // ~~
 
   async copyVideoFile(sourceVideoFile: string, targetFilePath: string, targetFileIsOverwritten = false): Promise<void> {
-    const smallVideoFilePath = targetFilePath + '.small.mp4';
+    const smallVideoFilePath = targetFilePath + ".small.mp4";
     await this.convertVideoFile(sourceVideoFile, smallVideoFilePath, 640, targetFileIsOverwritten);
 
-    const wideVideoFilePath = targetFilePath + '.wide.mp4';
+    const wideVideoFilePath = targetFilePath + ".wide.mp4";
     await this.convertVideoFile(sourceVideoFile, wideVideoFilePath, 1280, targetFileIsOverwritten);
 
     const largeVideoFilePath = targetFilePath;
@@ -168,10 +168,10 @@ export class FileService {
   // ~~
 
   async removeVideoFile(targetFilePath: string): Promise<void> {
-    const smallVideoFilePath = targetFilePath + '.small.mp4';
+    const smallVideoFilePath = targetFilePath + ".small.mp4";
     await this.removeFile(smallVideoFilePath);
 
-    const wideVideoFilePath = targetFilePath + '.wide.mp4';
+    const wideVideoFilePath = targetFilePath + ".wide.mp4";
     await this.removeFile(wideVideoFilePath);
 
     const largeVideoFilePath = targetFilePath;

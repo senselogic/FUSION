@@ -1,8 +1,8 @@
 // -- IMPORTS
 
-import { createServerClient } from '@supabase/ssr';
-import fs from 'fs/promises';
-import { logError } from 'senselogic-opus';
+import { createServerClient } from "@supabase/ssr";
+import fs from "fs/promises";
+import { logError } from "senselogic-opus";
 
 type CookieLike = {
   name: string;
@@ -41,7 +41,7 @@ class SupabaseService {
   // -- INQUIRIES
 
   getFileUrl(filePath: string): string {
-    return (this.storageUrl ?? '') + '/' + filePath;
+    return (this.storageUrl ?? "") + "/" + filePath;
   }
 
   // -- OPERATIONS
@@ -50,7 +50,7 @@ class SupabaseService {
     if (this.anonymousClient === null) {
       // Supabase SSR types vary across versions; keep runtime behavior and relax typing at the boundary.
       const create = createServerClient as unknown as (...args: any[]) => any;
-      this.anonymousClient = create(this.databaseUrl ?? '', this.databaseKey ?? '', {
+      this.anonymousClient = create(this.databaseUrl ?? "", this.databaseKey ?? "", {
         cookies: {
           getAll: () => [],
           setAll: () => undefined,
@@ -69,7 +69,7 @@ class SupabaseService {
         return Object.keys(request.cookies).map(
           (key): CookieLike => ({
             name: key,
-            value: decodeURIComponent(request.cookies?.[key] ?? ''),
+            value: decodeURIComponent(request.cookies?.[key] ?? ""),
           }),
         );
       }
@@ -81,13 +81,13 @@ class SupabaseService {
       for (const cookie of cookies) {
         reply.setCookie(cookie.name, encodeURIComponent(cookie.value), {
           ...(cookie.options ?? {}),
-          sameSite: 'Lax',
+          sameSite: "Lax",
           httpOnly: true,
         });
       }
     };
 
-    return create(this.databaseUrl ?? '', this.databaseKey ?? '', {
+    return create(this.databaseUrl ?? "", this.databaseKey ?? "", {
       cookies: { getAll, setAll },
     });
   }
@@ -101,9 +101,9 @@ class SupabaseService {
 
   async uploadFile(localFile: ArrayBuffer | Uint8Array, storageFilePath: string, storageFileIsOverwritten = false) {
     const { data, error } = await this.getClient(null, null)
-      .storage.from(this.storageName ?? '')
+      .storage.from(this.storageName ?? "")
       .upload(storageFilePath, localFile, {
-        cacheControl: '3600',
+        cacheControl: "3600",
         upsert: storageFileIsOverwritten,
       });
 
@@ -117,7 +117,7 @@ class SupabaseService {
   async copyFile(localFile: string | Uint8Array, storageFilePath: string, storageFileIsOverwritten = false) {
     let fileData: Uint8Array;
 
-    if (typeof localFile === 'string') {
+    if (typeof localFile === "string") {
       fileData = await fs.readFile(localFile);
     } else {
       fileData = localFile;
@@ -127,7 +127,7 @@ class SupabaseService {
   }
 
   async removeFile(storageFilePath: string) {
-    const { data, error } = await this.getClient(null, null).storage.from(this.storageName ?? '').remove([storageFilePath]);
+    const { data, error } = await this.getClient(null, null).storage.from(this.storageName ?? "").remove([storageFilePath]);
 
     if (error !== null) {
       logError(error);

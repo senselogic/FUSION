@@ -1,16 +1,16 @@
 // -- IMPORTS
 
-import adapter from '@sveltejs/adapter-node';
-import { createRequire } from 'module';
-import path from 'path';
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+import adapter from "@sveltejs/adapter-node";
+import { createRequire } from "module";
+import path from "path";
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
 
 // -- CONSTANTS
 
 const require = createRequire( import.meta.url );
 
-let senselogicFlowPackageFilePath = require.resolve( 'senselogic-flow/package.json' );
+let senselogicFlowPackageFilePath = require.resolve( "senselogic-flow/package.json" );
 let nodeModuleFolderPath = path.dirname( path.dirname( senselogicFlowPackageFilePath ) );
 
 // -- FUNCTIONS
@@ -49,8 +49,8 @@ export default defineConfig(
                         adapter: adapter(),
                         alias:
                             {
-                                $client: 'src/client',
-                                $admin: 'src/admin'
+                                $client: "src/client",
+                                $admin: "src/admin"
                             }
                     }
                     )
@@ -71,12 +71,12 @@ export default defineConfig(
         server:
             {
                 port: 8000,
-                host: '0.0.0.0'
+                host: "0.0.0.0"
             },
         preview:
             {
                 port: 8000,
-                host: '0.0.0.0'
+                host: "0.0.0.0"
             }
     }
     );

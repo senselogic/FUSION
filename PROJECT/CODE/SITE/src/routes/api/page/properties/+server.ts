@@ -2,7 +2,7 @@
 
 // -- IMPORTS
 
-import { json } from '@sveltejs/kit';
+import { json } from "@sveltejs/kit";
 import type { RequestHandler } from './$types';
 import { PropertiesPageController } from '$lib/controller/properties_page_controller';
 import { getKitHttpFromEvent } from '$lib/kit_http';

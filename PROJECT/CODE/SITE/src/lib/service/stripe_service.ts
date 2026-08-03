@@ -1,7 +1,7 @@
 // -- IMPORTS
 
-import { logError } from 'senselogic-opus';
-import Stripe from 'stripe';
+import { logError } from "senselogic-opus";
+import Stripe from "stripe";
 
 // -- TYPES
 
@@ -19,7 +19,7 @@ class StripeService {
   getClient(): Stripe {
     if (this.client === null) {
       // Keep behavior stable; Stripe's TS types enforce a specific apiVersion literal.
-      this.client = new Stripe(this.key ?? '', { apiVersion: '2026-04-22.dahlia' as any });
+      this.client = new Stripe(this.key ?? "", { apiVersion: "2026-04-22.dahlia" as any });
     }
 
     return this.client;
@@ -36,7 +36,7 @@ class StripeService {
   ): Promise<unknown> {
     try {
       const sessionParams: Record<string, unknown> = {
-        mode: 'payment',
+        mode: "payment",
         line_items: lineItemsArray,
         success_url: successUrl,
         cancel_url: cancelUrl,

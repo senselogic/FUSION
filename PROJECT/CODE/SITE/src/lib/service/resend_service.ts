@@ -1,7 +1,7 @@
 // -- IMPORTS
 
-import { Resend } from 'resend';
-import { logError } from 'senselogic-opus';
+import { Resend } from "resend";
+import { logError } from "senselogic-opus";
 
 // -- TYPES
 
@@ -18,7 +18,7 @@ class ResendService {
 
   getClient(): Resend {
     if (this.client === null) {
-      this.client = new Resend(this.key ?? '');
+      this.client = new Resend(this.key ?? "");
     }
 
     return this.client;

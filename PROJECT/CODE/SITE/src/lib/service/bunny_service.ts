@@ -1,6 +1,6 @@
 // -- IMPORTS
 
-import fs from 'fs/promises';
+import fs from "fs/promises";
 
 // -- TYPES
 
@@ -20,7 +20,7 @@ class BunnyService {
   // -- INQUIRIES
 
   getFileUrl(filePath: string): string {
-    return (this.baseUrl ?? '') + '/' + (this.storageName ?? '') + '/' + filePath;
+    return (this.baseUrl ?? "") + "/" + (this.storageName ?? "") + "/" + filePath;
   }
 
   // ~~
@@ -28,16 +28,16 @@ class BunnyService {
   async uploadFile(localFile: Uint8Array, storageFilePath: string): Promise<unknown | null> {
     try {
       const response = await fetch(this.getFileUrl(storageFilePath), {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          AccessKey: this.apiKey ?? '',
-          'Content-Type': 'application/octet-stream',
+          AccessKey: this.apiKey ?? "",
+          "Content-Type": "application/octet-stream",
         },
         body: localFile,
       });
 
       if (!response.ok) {
-        throw new Error('Failed to upload file: ' + response.statusText);
+        throw new Error("Failed to upload file: " + response.statusText);
       }
 
       let data: unknown | null = null;
@@ -53,7 +53,7 @@ class BunnyService {
 
       return data;
     } catch (error) {
-      console.error('Error uploading file to Bunny CDN:', error);
+      console.error("Error uploading file to Bunny CDN:", error);
       return null;
     }
   }
@@ -63,7 +63,7 @@ class BunnyService {
   async copyFile(localFile: string | Uint8Array, storageFilePath: string, storageFileIsOverwritten = false) {
     let fileData: Uint8Array;
 
-    if (typeof localFile === 'string') {
+    if (typeof localFile === "string") {
       fileData = await fs.readFile(localFile);
     } else {
       fileData = localFile;
@@ -77,12 +77,12 @@ class BunnyService {
   async removeFile(storageFilePath: string): Promise<unknown | null> {
     try {
       const response = await fetch(this.getFileUrl(storageFilePath), {
-        method: 'DELETE',
-        headers: { AccessKey: this.apiKey ?? '' },
+        method: "DELETE",
+        headers: { AccessKey: this.apiKey ?? "" },
       });
 
       if (!response.ok) {
-        throw new Error('Failed to remove file: ' + response.statusText);
+        throw new Error("Failed to remove file: " + response.statusText);
       }
 
       let data: unknown | null = null;
@@ -98,7 +98,7 @@ class BunnyService {
 
       return data;
     } catch (error) {
-      console.error('Error removing file from Bunny CDN:', error);
+      console.error("Error removing file from Bunny CDN:", error);
       return null;
     }
   }

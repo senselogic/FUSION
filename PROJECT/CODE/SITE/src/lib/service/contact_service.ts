@@ -1,7 +1,7 @@
 // -- IMPORTS
 
-import { getMapById, logError } from 'senselogic-opus';
-import { supabaseService } from './supabase_service';
+import { getMapById, logError } from "senselogic-opus";
+import { supabaseService } from "./supabase_service";
 
 // -- TYPES
 
@@ -29,7 +29,7 @@ class ContactService {
   }
 
   async getContactArray(): Promise<Contact[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('CONTACT').select();
+    const { data, error } = await supabaseService.getClient(null, null).from("CONTACT").select();
 
     if (error !== null) {
       logError(error);
@@ -39,7 +39,7 @@ class ContactService {
   }
 
   async getContactById(contactId: string): Promise<Contact | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('CONTACT').select().eq('id', contactId);
+    const { data, error } = await supabaseService.getClient(null, null).from("CONTACT").select().eq("id", contactId);
 
     if (error !== null) {
       logError(error);
@@ -50,7 +50,7 @@ class ContactService {
   }
 
   async getContactArrayByMail(mail: string): Promise<Contact[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('CONTACT').select().eq('mail', mail);
+    const { data, error } = await supabaseService.getClient(null, null).from("CONTACT").select().eq("mail", mail);
 
     if (error !== null) {
       logError(error);
@@ -60,7 +60,7 @@ class ContactService {
   }
 
   async getContactArrayByMailArray(mailArray: string[]): Promise<Contact[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('CONTACT').select().in('mail', mailArray);
+    const { data, error } = await supabaseService.getClient(null, null).from("CONTACT").select().in("mail", mailArray);
 
     if (error !== null) {
       logError(error);
@@ -98,7 +98,7 @@ class ContactService {
   async addContact(contact: Partial<Contact>) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('CONTACT').insert(contact);
+    const { data, error } = await supabaseService.getClient(null, null).from("CONTACT").insert(contact);
 
     if (error !== null) {
       logError(error);
@@ -110,7 +110,7 @@ class ContactService {
   async setContactById(contact: Partial<Contact>, contactId: string) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('CONTACT').update(contact).eq('id', contactId);
+    const { data, error } = await supabaseService.getClient(null, null).from("CONTACT").update(contact).eq("id", contactId);
 
     if (error !== null) {
       logError(error);
@@ -122,7 +122,7 @@ class ContactService {
   async removeContactById(contactId: string) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('CONTACT').delete().eq('id', contactId);
+    const { data, error } = await supabaseService.getClient(null, null).from("CONTACT").delete().eq("id", contactId);
 
     if (error !== null) {
       logError(error);

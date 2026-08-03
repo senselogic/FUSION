@@ -13,11 +13,11 @@ export const load: PageServerLoad = async (
     }
 ) =>
 {
-    let apiPath = '/api/page/home';
+    let apiPath = "/api/page/home";
     let response = await fetch(
         apiPath,
         {
-            method: 'POST'
+            method: "POST"
         }
         );
 

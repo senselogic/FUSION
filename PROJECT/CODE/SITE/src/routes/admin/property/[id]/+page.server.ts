@@ -17,7 +17,7 @@ export const load: PageServerLoad = async (
     let response = await fetch(
         apiPath,
         {
-            method: 'POST'
+            method: "POST"
         }
         );
 

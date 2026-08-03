@@ -1,15 +1,15 @@
 // -- IMPORTS
 
-import { getBrowserLanguageCode } from 'senselogic-lingo';
+import { getBrowserLanguageCode } from "senselogic-lingo";
 import type { LayoutServerLoad } from './$types';
 
 // -- CONSTANTS
 
-const defaultLanguageCode = 'en';
+const defaultLanguageCode = "en";
 const validLanguageCodeArray =
     [
-        'en',
-        'fr'
+        "en",
+        "fr"
     ];
 
 // -- FUNCTIONS
@@ -20,7 +20,7 @@ export const load: LayoutServerLoad = (
     }
 ) =>
 {
-    let acceptLanguageText = request.headers.get( 'accept-language' ) ?? defaultLanguageCode;
+    let acceptLanguageText = request.headers.get( "accept-language" ) ?? defaultLanguageCode;
 
     return (
         {

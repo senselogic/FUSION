@@ -1,7 +1,7 @@
 // -- IMPORTS
 
-import { getMapById, logError } from 'senselogic-opus';
-import { supabaseService } from './supabase_service';
+import { getMapById, logError } from "senselogic-opus";
+import { supabaseService } from "./supabase_service";
 
 // -- TYPES
 
@@ -23,7 +23,7 @@ class SpaceTypeService {
   // -- INQUIRIES
 
   async getSpaceTypeArray(): Promise<SpaceType[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE_TYPE').select();
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE_TYPE").select();
 
     if (error !== null) {
       logError(error);
@@ -35,7 +35,7 @@ class SpaceTypeService {
   // ~~
 
   async getSpaceTypeById(spaceTypeId: string): Promise<SpaceType | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE_TYPE').select().eq('id', spaceTypeId);
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE_TYPE").select().eq("id", spaceTypeId);
 
     if (error !== null) {
       logError(error);
@@ -80,7 +80,7 @@ class SpaceTypeService {
   async addSpaceType(spaceType: Partial<SpaceType>) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE_TYPE').insert(spaceType);
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE_TYPE").insert(spaceType);
 
     if (error !== null) {
       logError(error);
@@ -96,9 +96,9 @@ class SpaceTypeService {
 
     const { data, error } = await supabaseService
       .getClient(null, null)
-      .from('SPACE_TYPE')
+      .from("SPACE_TYPE")
       .update(spaceType)
-      .eq('id', spaceTypeId);
+      .eq("id", spaceTypeId);
 
     if (error !== null) {
       logError(error);
@@ -112,7 +112,7 @@ class SpaceTypeService {
   async removeSpaceTypeById(spaceTypeId: string) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE_TYPE').delete().eq('id', spaceTypeId);
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE_TYPE").delete().eq("id", spaceTypeId);
 
     if (error !== null) {
       logError(error);

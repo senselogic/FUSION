@@ -1,11 +1,11 @@
-declare module 'senselogic-opus' {
+declare module "senselogic-opus" {
   export function logError(error: unknown): void;
 
   export function getMap<T extends Record<string, unknown>>(arr: T[], key: string): Record<string, T>;
   export function getMapById<T extends { id: string }>(arr: T[]): Record<string, T>;
 }
 
-declare module 'senselogic-pika' {
+declare module "senselogic-pika" {
   export function createCappedImage(
     sourceImageFile: string,
     minWidth: number,

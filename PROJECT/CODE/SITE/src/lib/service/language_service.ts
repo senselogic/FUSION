@@ -1,7 +1,7 @@
 // -- IMPORTS
 
-import { getMap, logError } from 'senselogic-opus';
-import { supabaseService } from './supabase_service';
+import { getMap, logError } from "senselogic-opus";
+import { supabaseService } from "./supabase_service";
 
 // -- TYPES
 
@@ -21,7 +21,7 @@ class LanguageService {
   // -- INQUIRIES
 
   async getLanguageArray(): Promise<Language[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('LANGUAGE').select();
+    const { data, error } = await supabaseService.getClient(null, null).from("LANGUAGE").select();
 
     if (error !== null) {
       logError(error);
@@ -33,7 +33,7 @@ class LanguageService {
   // ~~
 
   async getLanguageByCode(languageCode: string): Promise<Language | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('LANGUAGE').select().eq('code', languageCode);
+    const { data, error } = await supabaseService.getClient(null, null).from("LANGUAGE").select().eq("code", languageCode);
 
     if (error !== null) {
       logError(error);
@@ -63,7 +63,7 @@ class LanguageService {
   async getCachedLanguageByCodeMap(): Promise<Record<string, Language>> {
     if (this.cachedLanguageByCodeMap === null || Date.now() > this.cachedLanguageArrayTimestamp + 300000) {
       const arr = (await this.getCachedLanguageArray()) ?? [];
-      this.cachedLanguageByCodeMap = getMap(arr, 'code') as Record<string, Language>;
+      this.cachedLanguageByCodeMap = getMap(arr, "code") as Record<string, Language>;
     }
 
     return this.cachedLanguageByCodeMap;
@@ -72,7 +72,7 @@ class LanguageService {
   async addLanguage(language: Partial<Language>) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('LANGUAGE').insert(language);
+    const { data, error } = await supabaseService.getClient(null, null).from("LANGUAGE").insert(language);
 
     if (error !== null) {
       logError(error);
@@ -84,7 +84,7 @@ class LanguageService {
   async setLanguageByCode(language: Partial<Language>, languageCode: string) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('LANGUAGE').update(language).eq('code', languageCode);
+    const { data, error } = await supabaseService.getClient(null, null).from("LANGUAGE").update(language).eq("code", languageCode);
 
     if (error !== null) {
       logError(error);
@@ -96,7 +96,7 @@ class LanguageService {
   async removeLanguageByCode(languageCode: string) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('LANGUAGE').delete().eq('code', languageCode);
+    const { data, error } = await supabaseService.getClient(null, null).from("LANGUAGE").delete().eq("code", languageCode);
 
     if (error !== null) {
       logError(error);

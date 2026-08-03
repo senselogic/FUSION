@@ -2,7 +2,7 @@
 
 // -- IMPORTS
 
-import type { Cookies, RequestEvent } from '@sveltejs/kit';
+import type { Cookies, RequestEvent } from "@sveltejs/kit";
 
 // -- TYPES
 
@@ -76,9 +76,9 @@ export function getKitReplyFromCookies(
                     name,
                     value,
                     {
-                        path: '/',
+                        path: "/",
                         ...( options ?? {} )
-                    } as Parameters<Cookies['set']>[ 2 ]
+                    } as Parameters<Cookies["set"]>[ 2 ]
                     );
             },
             clearCookie: (
@@ -89,9 +89,9 @@ export function getKitReplyFromCookies(
                 cookies.delete(
                     name,
                     {
-                        path: '/',
+                        path: "/",
                         ...( options ?? {} )
-                    } as Parameters<Cookies['delete']>[ 1 ]
+                    } as Parameters<Cookies["delete"]>[ 1 ]
                     );
             }
         }

@@ -1,8 +1,8 @@
 // -- IMPORTS
 
-import { getMapById, logError } from 'senselogic-opus';
-import { supabaseService } from './supabase_service';
-import { spaceTypeService } from './space_type_service';
+import { getMapById, logError } from "senselogic-opus";
+import { supabaseService } from "./supabase_service";
+import { spaceTypeService } from "./space_type_service";
 
 // -- TYPES
 
@@ -34,7 +34,7 @@ class SpaceService {
   // ~~
 
   async getSpaceArray(): Promise<Space[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE').select();
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE").select();
 
     if (error !== null) {
       logError(error);
@@ -46,7 +46,7 @@ class SpaceService {
   // ~~
 
   async getSpaceById(spaceId: string): Promise<Space | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE').select().eq('id', spaceId);
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE").select().eq("id", spaceId);
 
     if (error !== null) {
       logError(error);
@@ -59,7 +59,7 @@ class SpaceService {
   // ~~
 
   async getSpaceArrayByPropertyId(propertyId: string, isInflated = false): Promise<Space[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE').select().eq('propertyId', propertyId);
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE").select().eq("propertyId", propertyId);
 
     if (error !== null) {
       logError(error);
@@ -77,7 +77,7 @@ class SpaceService {
   // ~~
 
   async getSpaceArrayByPropertyIdArray(propertyIdArray: string[]): Promise<Space[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('SPACE').select().in('propertyId', propertyIdArray);
+    const { data, error } = await supabaseService.getClient(null, null).from("SPACE").select().in("propertyId", propertyIdArray);
 
     if (error !== null) {
       logError(error);
@@ -121,7 +121,7 @@ class SpaceService {
   async addSpace(space: Partial<Space>, request: unknown, reply: unknown) {
     this.clearCache();
 
-    const { data, error } = await (supabaseService as any).getClient(request as any, reply as any).from('SPACE').insert(space);
+    const { data, error } = await (supabaseService as any).getClient(request as any, reply as any).from("SPACE").insert(space);
 
     if (error !== null) {
       logError(error);
@@ -137,9 +137,9 @@ class SpaceService {
 
     const { data, error } = await (supabaseService as any)
       .getClient(request as any, reply as any)
-      .from('SPACE')
+      .from("SPACE")
       .update(space)
-      .eq('id', spaceId);
+      .eq("id", spaceId);
 
     if (error !== null) {
       logError(error);
@@ -153,7 +153,7 @@ class SpaceService {
   async removeSpaceById(spaceId: string, request: unknown, reply: unknown) {
     this.clearCache();
 
-    const { data, error } = await (supabaseService as any).getClient(request as any, reply as any).from('SPACE').delete().eq('id', spaceId);
+    const { data, error } = await (supabaseService as any).getClient(request as any, reply as any).from("SPACE").delete().eq("id", spaceId);
 
     if (error !== null) {
       logError(error);

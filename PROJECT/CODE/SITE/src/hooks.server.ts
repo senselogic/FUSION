@@ -1,22 +1,22 @@
 // -- IMPORTS
 
-import type { Handle } from '@sveltejs/kit';
-import dotenv from 'dotenv';
-import { setLanguageSeparator } from 'senselogic-lingo';
+import type { Handle } from "@sveltejs/kit";
+import dotenv from "dotenv";
+import { setLanguageSeparator } from "senselogic-lingo";
 
 // -- CONSTANTS
 
 const corsHeaderRecord: Record<string, string> =
     {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization"
     };
 
 // -- STATEMENTS
 
 dotenv.config();
-setLanguageSeparator( '¨' );
+setLanguageSeparator( "¨" );
 
 // -- FUNCTIONS
 
@@ -27,7 +27,7 @@ export const handle: Handle = async (
     }
 ) =>
 {
-    if ( event.request.method === 'OPTIONS' )
+    if ( event.request.method === "OPTIONS" )
     {
         return new Response(
             null,

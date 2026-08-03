@@ -1,14 +1,14 @@
 // -- IMPORTS
 
-import { mount } from 'svelte';
-import './app.styl';
-import App from './App.svelte';
+import { mount } from "svelte";
+import "./app.styl";
+import App from "./App.svelte";
 
 // -- STATEMENTS
 
-const target = document.getElementById('app');
+const target = document.getElementById("app");
 if (!target) {
-  throw new Error('Missing #app element');
+  throw new Error("Missing #app element");
 }
 
 const app = mount(App, {

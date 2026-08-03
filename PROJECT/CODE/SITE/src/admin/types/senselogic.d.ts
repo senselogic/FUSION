@@ -1,4 +1,4 @@
-declare module 'senselogic-lingo'
+declare module "senselogic-lingo"
 {
     // -- TYPES
 

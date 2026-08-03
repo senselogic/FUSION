@@ -1,6 +1,6 @@
 // -- IMPORTS
 
-import { Controller } from './controller';
+import { Controller } from "./controller";
 
 // -- TYPES
 

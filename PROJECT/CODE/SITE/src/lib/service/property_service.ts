@@ -1,8 +1,8 @@
 // -- IMPORTS
 
-import { getMapById, logError } from 'senselogic-opus';
-import { spaceService } from './space_service';
-import { supabaseService } from './supabase_service';
+import { getMapById, logError } from "senselogic-opus";
+import { spaceService } from "./space_service";
+import { supabaseService } from "./supabase_service";
 
 // -- TYPES
 
@@ -41,7 +41,7 @@ class PropertyService {
     }
 
     for (const space of spaceArray) {
-      const property = propertyByIdMap[space.propertyId ?? ''];
+      const property = propertyByIdMap[space.propertyId ?? ""];
       if (!property) continue;
       property.spaceArray?.push(space);
       if (property.spaceByIdMap) {
@@ -53,7 +53,7 @@ class PropertyService {
   // ~~
 
   async getPropertyArray(isInflated = false): Promise<Property[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('PROPERTY').select();
+    const { data, error } = await supabaseService.getClient(null, null).from("PROPERTY").select();
 
     if (error !== null) {
       logError(error);
@@ -71,7 +71,7 @@ class PropertyService {
   // ~~
 
   async getFavoritePropertyArray(isInflated = false): Promise<Property[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('PROPERTY').select().eq('isFavorite', true);
+    const { data, error } = await supabaseService.getClient(null, null).from("PROPERTY").select().eq("isFavorite", true);
 
     if (error !== null) {
       logError(error);
@@ -89,7 +89,7 @@ class PropertyService {
   // ~~
 
   async getPropertyById(propertyId: string, isInflated = false): Promise<Property | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('PROPERTY').select().eq('id', propertyId);
+    const { data, error } = await supabaseService.getClient(null, null).from("PROPERTY").select().eq("id", propertyId);
 
     if (error !== null) {
       logError(error);
@@ -148,7 +148,7 @@ class PropertyService {
   async addProperty(property: Partial<Property>, request: unknown, reply: unknown) {
     this.clearCache();
 
-    const { data, error } = await (supabaseService as any).getClient(request as any, reply as any).from('PROPERTY').insert(property);
+    const { data, error } = await (supabaseService as any).getClient(request as any, reply as any).from("PROPERTY").insert(property);
 
     if (error !== null) {
       logError(error);
@@ -164,9 +164,9 @@ class PropertyService {
 
     const { data, error } = await (supabaseService as any)
       .getClient(request as any, reply as any)
-      .from('PROPERTY')
+      .from("PROPERTY")
       .update(property)
-      .eq('id', propertyId);
+      .eq("id", propertyId);
 
     if (error !== null) {
       logError(error);
@@ -182,9 +182,9 @@ class PropertyService {
 
     const { data, error } = await (supabaseService as any)
       .getClient(request as any, reply as any)
-      .from('PROPERTY')
+      .from("PROPERTY")
       .delete()
-      .eq('id', propertyId);
+      .eq("id", propertyId);
 
     if (error !== null) {
       logError(error);

@@ -1,7 +1,7 @@
 // -- IMPORTS
 
-import { getMap, logError } from 'senselogic-opus';
-import { supabaseService } from './supabase_service';
+import { getMap, logError } from "senselogic-opus";
+import { supabaseService } from "./supabase_service";
 
 // -- TYPES
 
@@ -21,7 +21,7 @@ class CountryService {
   // -- INQUIRIES
 
   async getCountryArray(): Promise<Country[] | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('COUNTRY').select();
+    const { data, error } = await supabaseService.getClient(null, null).from("COUNTRY").select();
 
     if (error !== null) {
       logError(error);
@@ -31,7 +31,7 @@ class CountryService {
   }
 
   async getCountryByCode(countryCode: string): Promise<Country | null> {
-    const { data, error } = await supabaseService.getClient(null, null).from('COUNTRY').select().eq('code', countryCode);
+    const { data, error } = await supabaseService.getClient(null, null).from("COUNTRY").select().eq("code", countryCode);
 
     if (error !== null) {
       logError(error);
@@ -61,7 +61,7 @@ class CountryService {
   async getCachedCountryByCodeMap(): Promise<Record<string, Country>> {
     if (this.cachedCountryByCodeMap === null || Date.now() > this.cachedCountryArrayTimestamp + 300000) {
       const arr = (await this.getCachedCountryArray()) ?? [];
-      this.cachedCountryByCodeMap = getMap(arr, 'code') as Record<string, Country>;
+      this.cachedCountryByCodeMap = getMap(arr, "code") as Record<string, Country>;
     }
 
     return this.cachedCountryByCodeMap;
@@ -70,7 +70,7 @@ class CountryService {
   async addCountry(country: Partial<Country>) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('COUNTRY').insert(country);
+    const { data, error } = await supabaseService.getClient(null, null).from("COUNTRY").insert(country);
 
     if (error !== null) {
       logError(error);
@@ -82,7 +82,7 @@ class CountryService {
   async setCountryByCode(country: Partial<Country>, countryCode: string) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('COUNTRY').update(country).eq('code', countryCode);
+    const { data, error } = await supabaseService.getClient(null, null).from("COUNTRY").update(country).eq("code", countryCode);
 
     if (error !== null) {
       logError(error);
@@ -94,7 +94,7 @@ class CountryService {
   async removeCountryByCode(countryCode: string) {
     this.clearCache();
 
-    const { data, error } = await supabaseService.getClient(null, null).from('COUNTRY').delete().eq('code', countryCode);
+    const { data, error } = await supabaseService.getClient(null, null).from("COUNTRY").delete().eq("code", countryCode);
 
     if (error !== null) {
       logError(error);

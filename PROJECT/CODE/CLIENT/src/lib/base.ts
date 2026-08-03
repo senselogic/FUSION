@@ -5,41 +5,41 @@ import {
   getLanguageCode,
   setLanguageCode,
   setLanguageSeparator
-} from 'senselogic-lingo';
-import { Capacitor } from '@capacitor/core';
+} from "senselogic-lingo";
+import { Capacitor } from "@capacitor/core";
 
 // -- CONSTANTS
 
 export const platform = Capacitor.getPlatform();
-export const hostUrl = platform === 'android' ? 'https://fusion-project.com/' : '';
-export const defaultLanguageCode = 'en';
-export const validLanguageCodeArray = [ 'en', 'fr' ];
+export const hostUrl = platform === "android" ? "https://fusion-project.com/" : "";
+export const defaultLanguageCode = "en";
+export const validLanguageCodeArray = [ "en", "fr" ];
 
 // -- VARIABLES
 
 export const monthNameArray = [
-  'January¨fr:Janvier',
-  'February¨fr:Février',
-  'March¨fr:Mars',
-  'April¨fr:Avril',
-  'May¨fr:May',
-  'June¨fr:Juin',
-  'July¨fr:Juillet',
-  'August¨fr:Août',
-  'September¨fr:Septembre',
-  'October¨fr:Octobre',
-  'November¨fr:Novembre',
-  'December¨fr:Décembre',
+  "January¨fr:Janvier",
+  "February¨fr:Février",
+  "March¨fr:Mars",
+  "April¨fr:Avril",
+  "May¨fr:May",
+  "June¨fr:Juin",
+  "July¨fr:Juillet",
+  "August¨fr:Août",
+  "September¨fr:Septembre",
+  "October¨fr:Octobre",
+  "November¨fr:Novembre",
+  "December¨fr:Décembre",
 ];
 
 export const weekdayNameArray = [
-  'Monday¨fr:Lundi',
-  'Tuesday¨fr:Mardi',
-  'Wednesday¨fr:Mercredi',
-  'Thursday¨fr:Jeudi',
-  'Friday¨fr:Vendredi',
-  'Saturday¨fr:Samedi',
-  'Sunday¨fr:Dimanche',
+  "Monday¨fr:Lundi",
+  "Tuesday¨fr:Mardi",
+  "Wednesday¨fr:Mercredi",
+  "Thursday¨fr:Jeudi",
+  "Friday¨fr:Vendredi",
+  "Saturday¨fr:Samedi",
+  "Sunday¨fr:Dimanche",
 ];
 
 // -- FUNCTIONS
@@ -77,5 +77,5 @@ export function getLocalizedWeekdayName(weekdayIndex: number, maximumCharacterCo
 
 // -- STATEMENTS
 
-setLanguageSeparator( '¨' );
+setLanguageSeparator( "¨" );
 setLanguageCode( getLanguageCode() || defaultLanguageCode );
