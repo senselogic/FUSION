@@ -149,13 +149,13 @@ function transformBaseSource(
 
     transformedText
         = transformedText.replace(
-            /import \{ Capacitor \} from '@capacitor\/core';\r?\n/,
+            /[ \t]*import \{ Capacitor \} from ['"]@capacitor\/core['"];\r?\n/,
             ''
             );
 
     transformedText
         = transformedText.replace(
-            /export const platform = Capacitor\.getPlatform\(\);\r?\nexport const hostUrl = platform === 'android' \? 'https:\/\/fusion-project\.com\/' : '';\r?\n/,
+            /export const platform = Capacitor\.getPlatform\(\);\r?\nexport const hostUrl = platform === ['"]android['"] \? ['"]https:\/\/fusion-project\.com\/['"] : ['"]['"];\r?\n/,
             "export const platform = 'web';\nexport const hostUrl = '';\n"
             );
 
@@ -172,13 +172,13 @@ function stripRouterImports(
 
     transformedText
         = transformedText.replace(
-            /import \{ link \} from '@dvcol\/svelte-simple-router\/router';\r?\n/,
+            /[ \t]*import \{ link \} from '@dvcol\/svelte-simple-router\/router';\r?\n/,
             ''
             );
 
     transformedText
         = transformedText.replace(
-            /import \{ RouterView \} from '@dvcol\/svelte-simple-router\/components';\r?\n/,
+            /[ \t]*import \{ RouterView \} from '@dvcol\/svelte-simple-router\/components';\r?\n/,
             ''
             );
 
@@ -362,14 +362,14 @@ function writeGeneratedRoutes(
     writePageComponent(
         appHomeFolderPath,
         '$client/lib/page/HomePage.svelte',
-        'favoritePropertyArray={ data.favoritePropertyArray } languageCode={ data.languageCode }'
+        'favoritePropertyArray={ data.favoritePropertyArray } languageTag={ data.languageTag }'
         );
 
     writePageServerLoad( appPropertiesFolderPath, "'/api/page/properties'" );
     writePageComponent(
         appPropertiesFolderPath,
         '$client/lib/page/PropertiesPage.svelte',
-        'propertyArray={ data.propertyArray } languageCode={ data.languageCode }'
+        'propertyArray={ data.propertyArray } languageTag={ data.languageTag }'
         );
 
     writePageServerLoad( appPropertyFolderPath, "`/api/page/property/${ params.id }`" );
@@ -388,7 +388,7 @@ function writeGeneratedRoutes(
     let { data } = $props();
 </script>
 
-<PageComponent id={ $page.params.id ?? '' } property={ data.property } languageCode={ data.languageCode } />
+<PageComponent id={ $page.params.id ?? '' } property={ data.property } languageTag={ data.languageTag } />
 `
         );
 
@@ -401,14 +401,14 @@ function writeGeneratedRoutes(
     writePageComponent(
         adminHomeFolderPath,
         '$admin/lib/page/HomePage.svelte',
-        'favoritePropertyArray={ data.favoritePropertyArray } languageCode={ data.languageCode }'
+        'favoritePropertyArray={ data.favoritePropertyArray } languageTag={ data.languageTag }'
         );
 
     writePageServerLoad( adminPropertiesFolderPath, "'/api/page/properties'" );
     writePageComponent(
         adminPropertiesFolderPath,
         '$admin/lib/page/PropertiesPage.svelte',
-        'propertyArray={ data.propertyArray } languageCode={ data.languageCode }'
+        'propertyArray={ data.propertyArray } languageTag={ data.languageTag }'
         );
 
     writePageServerLoad( adminPropertyFolderPath, "`/api/page/property/${ params.id }`" );
@@ -427,7 +427,7 @@ function writeGeneratedRoutes(
     let { data } = $props();
 </script>
 
-<PageComponent id={ $page.params.id ?? '' } property={ data.property } languageCode={ data.languageCode } />
+<PageComponent id={ $page.params.id ?? '' } property={ data.property } languageTag={ data.languageTag } />
 `
         );
 

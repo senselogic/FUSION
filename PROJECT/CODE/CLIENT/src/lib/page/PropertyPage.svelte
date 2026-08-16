@@ -1,9 +1,9 @@
 <script lang="ts">
     // -- IMPORTS
 
-    import { getLanguageCode, getLocalizedText, setLanguageCode, setLanguageSeparator } from 'senselogic-lingo';
+    import { getLocalizedText, setLanguageSeparator } from 'senselogic-lingo';
     import axios from 'axios';
-    import { getHostRoute } from '../base';
+    import { defaultLanguageTag, getHostRoute } from '../base';
     import type { PropertyDto, PropertyPageResponseDto } from '../api_types';
 
     // -- VARIABLES
@@ -11,12 +11,12 @@
     let {
         id,
         property: initialProperty = undefined,
-        languageCode = getLanguageCode()
+        languageTag = defaultLanguageTag
     }:
     {
         id: string;
         property?: PropertyDto | null;
-        languageCode?: string;
+        languageTag?: string;
     } = $props();
 
     let property = $state<PropertyDto | null>( initialProperty === undefined ? null : initialProperty );
@@ -25,13 +25,6 @@
     // -- STATEMENTS
 
     setLanguageSeparator( '¨' );
-
-    $effect.pre(
-        () =>
-        {
-            setLanguageCode( languageCode );
-        }
-        );
 
     $effect(
         () =>
@@ -85,8 +78,8 @@
     <div class="hourglass">Loading...</div>
 {:else if property}
     <div>
-        <h1>{ getLocalizedText( property.title, languageCode ) }</h1>
-        <p>{ getLocalizedText( property.description ?? '', languageCode ) }</p>
+        <h1>{ getLocalizedText( property.title, languageTag ) }</h1>
+        <p>{ getLocalizedText( property.description ?? '', languageTag ) }</p>
     </div>
 {:else}
     <div>Property not found</div>

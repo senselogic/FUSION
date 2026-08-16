@@ -356,11 +356,11 @@ main();
     // -- IMPORTS
 
     import { onMount } from "svelte";
-    import { getApplicationData, getLanguageCodePath, getLocalizedText } from "../application.ts";
+    import { getApplicationData, getLanguageTagPath, getLocalizedText } from "../application.ts";
 
     // -- VARIABLES
 
-    export let languageCode;
+    export let languageTag;
 
     let applicationData = getApplicationData();
     let homePageData = applicationData.homePage;
@@ -380,7 +380,7 @@ main();
     function handleLanguageChange( event )
     {
         window.location.href
-            = getLanguageCodePath(
+            = getLanguageTagPath(
                 path,
                 event.target.value
                 );
@@ -391,7 +391,7 @@ main();
     <div class="header-menu-container">
         <div class="header-menu-logo">
             <h1 class="header-menu-logo-text">
-                { getLocalizedText( homePageData.title ) }
+                { getLocalizedText( homePageData.title, languageTag ) }
             </h1>
         </div>
 
@@ -400,11 +400,11 @@ main();
                 {#each applicationData.headerMenuButtonArray as menuButtonItem, buttonIndex}
                     <li class="header-menu-item">
                         <a
-                            href={ `/${ languageCode }/${ menuButtonItem.route }` }
+                            href={ `/${ languageTag }/${ menuButtonItem.route }` }
                             class="header-menu-button"
                         >
                             <span class="header-menu-button-text">
-                                { getLocalizedText( menuButtonItem.text ) }
+                                { getLocalizedText( menuButtonItem.text, languageTag ) }
                             </span>
                         </a>
                     </li>
@@ -415,12 +415,12 @@ main();
         <div class="header-menu-language">
             <select
                 class="header-menu-language-select"
-                value={ languageCode }
+                value={ languageTag }
                 on:change={ handleLanguageChange }
             >
-                {#each Object.entries( applicationData.languageByCodeMap ) as [ code, languageItem ]}
-                    <option value={ code }>
-                        { getLocalizedText( languageItem.name ) }
+                {#each Object.entries( applicationData.languageByTagMap ) as [ tag, languageItem ]}
+                    <option value={ tag }>
+                        { getLocalizedText( languageItem.name, languageTag ) }
                     </option>
                 {/each}
             </select>

@@ -2,7 +2,7 @@ public
 
     LANGUAGE | dropped
 
-        code : STRING | key, unique
+        tag : STRING | key, unique
         number : FLOAT64
         name : STRING
         creationTimestamp : TIMESTAMP | generated

@@ -5,8 +5,8 @@ import type { LayoutServerLoad } from './$types';
 
 // -- CONSTANTS
 
-const defaultLanguageCode = "en";
-const validLanguageCodeArray =
+const defaultLanguageTag = "en";
+const validLanguageTagArray =
     [
         "en",
         "fr"
@@ -20,15 +20,15 @@ export const load: LayoutServerLoad = (
     }
 ) =>
 {
-    let acceptLanguageText = request.headers.get( "accept-language" ) ?? defaultLanguageCode;
+    let acceptLanguageText = request.headers.get( "accept-language" ) ?? defaultLanguageTag;
 
     return (
         {
-            languageCode:
+            languageTag:
                 getBrowserLanguageCode(
                     acceptLanguageText,
-                    validLanguageCodeArray,
-                    defaultLanguageCode
+                    validLanguageTagArray,
+                    defaultLanguageTag
                     )
         }
         );

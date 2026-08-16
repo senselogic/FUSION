@@ -2,21 +2,21 @@
     // -- IMPORTS
 
     import axios from 'axios';
-    import { getLanguageCode, getLocalizedText, setLanguageCode, setLanguageSeparator } from 'senselogic-lingo';
+    import { getLocalizedText, setLanguageSeparator } from 'senselogic-lingo';
     import { onMount } from 'svelte';
     import { link } from '@dvcol/svelte-simple-router/router';
-    import { getHostRoute } from '../base';
+    import { defaultLanguageTag, getHostRoute } from '../base';
     import type { HomePageResponseDto, PropertyDto } from '../api_types';
 
     // -- VARIABLES
 
     let {
         favoritePropertyArray: initialFavoritePropertyArray = undefined,
-        languageCode = getLanguageCode()
+        languageTag = defaultLanguageTag
     }:
     {
         favoritePropertyArray?: PropertyDto[] | null;
-        languageCode?: string;
+        languageTag?: string;
     } = $props();
 
     let favoritePropertyArray = $state<PropertyDto[]>( initialFavoritePropertyArray ?? [] );
@@ -25,13 +25,6 @@
     // -- STATEMENTS
 
     setLanguageSeparator( '¨' );
-
-    $effect.pre(
-        () =>
-        {
-            setLanguageCode( languageCode );
-        }
-        );
 
     $effect(
         () =>
@@ -87,7 +80,7 @@
         {#each favoritePropertyArray as property }
             <a href={ '/property/' + property.id } use:link>
                 <div class="property">
-                    <p>{ getLocalizedText( property.title, languageCode ) }</p>
+                    <p>{ getLocalizedText( property.title, languageTag ) }</p>
                 </div>
             </a>
         {/each}

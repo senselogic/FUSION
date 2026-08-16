@@ -4,19 +4,17 @@
     // -- IMPORTS
 
     import favicon from '$lib/assets/favicon.svg';
-    import { setLanguageCode, setLanguageSeparator } from 'senselogic-lingo';
+    import { setLanguageSeparator } from 'senselogic-lingo';
 
     // -- VARIABLES
 
     let {
-        children,
-        data
+        children
     } = $props();
 
     // -- STATEMENTS
 
     setLanguageSeparator( '¨' );
-    setLanguageCode( data.languageCode );
 </script>
 
 <svelte:head>
